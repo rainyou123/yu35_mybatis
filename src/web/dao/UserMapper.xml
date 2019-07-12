@@ -7,7 +7,19 @@
     <select id="getUserById" parameterType="Integer" resultType="web.pojo.User">
         select * from t_user where id = #{id}
     </select>
+    <!-- void insertUser(User user);-->
+    <select id="insertUser" parameterType="web.pojo.User" >
+        INSERT INTO t_user VALUES(null, #{name} ,#{sex} ,#{email})
+    </select>
+    <!--User getUserByQueryVo(QueryVo vo);-->
+    <select id="getUserByQueryVo" parameterType="web.vo.QueryVo" resultType="web.pojo.User">
+        SELECT * FROM t_user where name like "%"#{user.name}"%"
+    </select>
 </mapper>
+
+
+
+
 
 
 
