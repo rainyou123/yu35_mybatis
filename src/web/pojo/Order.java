@@ -5,6 +5,15 @@ public class Order {
     private int userId;
     private String number;
     private String createtime;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;
@@ -45,6 +54,7 @@ public class Order {
                 ", userId=" + userId +
                 ", number='" + number + '\'' +
                 ", createtime='" + createtime + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

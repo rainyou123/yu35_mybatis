@@ -20,6 +20,8 @@ public interface UserMapper {
     List<User> getUsersByIds(Integer[] ids);
 
     List<User> getUsersByQueryVo(QueryVo vo);
+
+    List<User> getUsersByOBM();
 }
 //mybatis 规定只能是接口
 //一个接口要有一个与名相同的xml  必须放在一个目录中 例如UserMapper 和 他的xml 在dao层中
