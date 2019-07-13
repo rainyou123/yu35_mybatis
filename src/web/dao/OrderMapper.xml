@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="web.dao.OrderMapper">
+<!--    List<Order> getAllOrders(); -->
+    <resultMap id="orderMap" type="web.pojo.Order">
+        <id property="id" column="id"></id>
+        <result property="userId" column="user_id"></result>
+        <!--主键用 id  其他普通用 result-->
+    </resultMap>
+    <select id="getAllOrders" resultMap="orderMap">
+        select * from t_order
+    </select>
+</mapper>
+
+
+
+
+
+
+

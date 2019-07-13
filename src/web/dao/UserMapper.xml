@@ -7,14 +7,68 @@
     <select id="getUserById" parameterType="Integer" resultType="web.pojo.User">
         select * from t_user where id = #{id}
     </select>
+
+
     <!-- void insertUser(User user);-->
     <select id="insertUser" parameterType="web.pojo.User" >
         INSERT INTO t_user VALUES(null, #{name} ,#{sex} ,#{email})
     </select>
+
+
     <!--User getUserByQueryVo(QueryVo vo);-->
     <select id="getUserByQueryVo" parameterType="web.vo.QueryVo" resultType="web.pojo.User">
         SELECT * FROM t_user where name like "%"#{user.name}"%"
     </select>
+
+
+    <!--int getCountForUser();-->
+    <select id="getCountForUser" resultType="Integer">
+        select count(*) from t_user
+    </select>
+
+
+    <sql id="selector">select * from t_user</sql>
+    <!--List<User> getUsersByNameAndSex(User user);-->
+    <select id="getUsersByNameAndSex" resultType="web.pojo.User" parameterType="web.pojo.User">
+        <include refid="selector"/>
+        <where>
+            <if test="name != null and name != '' ">
+                and name = #{name}
+            </if>
+            <if test="sex != null and sex != '' ">
+                and sex = #{sex}
+            </if>
+        </where>
+    </select>
+
+
+    <!--List<User> getUsersByIds(List<Integer> ids);    List<User> getUsersByIds(List<Integer> ids);-->
+    <select id="getUsersByIds" resultType="web.pojo.User" parameterType="java.util.Arrays">
+        <!--写不写 parameterType 都行-->
+        <include refid="selector"/>
+        <where>
+            <!--<foreach collection="list" open="id in (" separator="," close=")" item="id">-->
+            <foreach collection="array" open="id in (" separator="," close=")" item="id">
+                <!--item 中名字随便起-->
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+
+
+    <!--List<User> getUsersByQueryVo(QueryVo vo);-->
+    <select id="getUsersByQueryVo" resultType="web.pojo.User" parameterType="web.vo.QueryVo">
+        <!--web.vo 写不写都行 因为SqlMapConfig.xml中配置了别名-->
+        <include refid="selector"/>
+        <where>
+            <foreach collection="ids" open=" id in (" separator="," close=")" item="id">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+
 </mapper>
 
 
